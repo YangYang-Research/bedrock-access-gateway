@@ -38,10 +38,7 @@ build_and_push_images() {
         ACCOUNT_ID=$(aws sts get-caller-identity --region $REGION --query Account --output text)
 
         # Create repository URI
-        REPOSITORY_URI="${ACCOUNT_ID}.dkr.ecr.${REGION}.amazonaws.com/${IMAGE_NAME}"
-
-        # Create ECR repository if it doesn't exist
-        aws ecr create-repository --repository-name "${IMAGE_NAME}" --region $REGION || true
+        REPOSITORY_URI="public.ecr.aws/j8d4r7c5/third-party/bedrock-access-gateway"
 
         # Log in to ECR
         aws ecr get-login-password --region $REGION | docker login --username AWS --password-stdin $REPOSITORY_URI
